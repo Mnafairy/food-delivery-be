@@ -1,40 +1,45 @@
-import { FoodModel } from "@/models/food.schema";
-import { FoodType } from "@/utils/types/food";
+import { CategoryModel } from "@/models/category.schema";
+import { CategoryType } from "@/utils/types/category";
 
-export const createFood = async (name: string) => {
-  const createFood = FoodModel.create({ name });
-  return createFood;
+export const createCategory = async (name: string) => {
+  const createCategory = await CategoryModel.create({ name });
+  return createCategory;
 };
 
-export const getFoods = async (): Promise<FoodType[]> => {
+export const getCategories = async (): Promise<CategoryType[]> => {
   try {
-    const categories = await FoodModel.find();
+    const categories = await CategoryModel.find();
     return categories;
   } catch (e: any) {
     throw new Error(e.message);
   }
 };
-
-export const getFoodById = async (id: string) => {
+export const getCategoryById = async (id: string) => {
   try {
-    const food = await FoodModel.findOne({ _id: id });
-    return food;
+    const category = await CategoryModel.findOne({ _id: id });
+    return category;
   } catch (e: any) {
     throw new Error(e.message);
   }
 };
 
-export const deleteFood = async (id: string) => {
+export const deleteCategory = async (id: string) => {
   try {
-    await FoodModel.deleteOne({ _id: id });
+    await CategoryModel.deleteOne({ _id: id });
   } catch (e: any) {
     throw new Error(e.message);
   }
 };
-
-export const updateFood = async (id: string, updateInfo: Partial<FoodType>) => {
+export const updateCategory = async (
+  id: string,
+  updateInfo: Partial<string>
+) => {
   try {
-    await FoodModel.updateOne({ _id: id }, { updateInfo });
+    const updatedCategory = await CategoryModel.updateOne(
+      { _id: id },
+      { name: updateInfo }
+    );
+    return updatedCategory;
   } catch (e: any) {
     throw new Error(e.message);
   }
