@@ -30,8 +30,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
     case "DELETE":
       try {
-        const delCategory = await deleteCategory(body.id);
-        return res.status(200).json(delCategory);
+        const delCat = await deleteCategory(body.id);
+        return res.status(200).json(delCat);
       } catch (e: any) {
         return res.status(400).json({ message: e.message });
       }
