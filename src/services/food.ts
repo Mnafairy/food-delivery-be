@@ -1,8 +1,23 @@
 import { FoodModel } from "@/models/food.schema";
 import { FoodType } from "@/utils/types/food";
+import mongoose, { model, Schema } from "mongoose";
 
-export const createFood = async (name: string) => {
-  const createFood = FoodModel.create({ name });
+export const createFood = async (
+  foodName: String,
+  category: { type: Schema.Types.ObjectId; ref: "Category"; required: true },
+  price: Number,
+  imagePath: String,
+  ingredients: [],
+  sale: Number
+) => {
+  const createFood = FoodModel.create({
+    foodName,
+    category,
+    price,
+    imagePath,
+    ingredients,
+    sale,
+  });
   return createFood;
 };
 
