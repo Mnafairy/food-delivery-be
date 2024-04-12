@@ -23,8 +23,8 @@ export const createFood = async (
 
 export const getFoods = async (): Promise<FoodType[]> => {
   try {
-    const categories = await FoodModel.find();
-    return categories;
+    const foods: FoodType[] = await FoodModel.find().populate("category");
+    return foods;
   } catch (e: any) {
     throw new Error(e.message);
   }
